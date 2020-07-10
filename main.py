@@ -21,7 +21,7 @@ def detect(queue_in, queue_out):
         # convert the frame to a blob and pass the blob through the
         # network and obtain the detections
         detections = detector.detect(fr)
-        boxes = [centroid for (conf, box, centroid) in detections]
+        boxes = [bx for (conf, bx, cent) in detections]
 
         queue_out.put(boxes)
 
