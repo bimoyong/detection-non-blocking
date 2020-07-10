@@ -75,16 +75,16 @@ if __name__ == "__main__":
     detect_Q_out = multiprocessing.Queue()
 
     # spawn a daemon process for object detection
-    detect_thd = Thread(target=detect, name="Detector",
-                        args=(detect_Q_in, detect_Q_out))
-    detect_thd.daemon = True
-    detect_thd.start()
+    detect_T = Thread(target=detect, name="Detector",
+                      args=(detect_Q_in, detect_Q_out))
+    detect_T.daemon = True
+    detect_T.start()
 
     # spawn a daemon process for object detection
-    detect_handle_thd = Thread(target=detect_handle, name="Detection Handler",
-                               args=(detect_Q_out,))
-    detect_handle_thd.daemon = True
-    detect_handle_thd.start()
+    detect_T_handle = Thread(target=detect_handle, name="Detection Handler",
+                             args=(detect_Q_out,))
+    detect_T_handle.daemon = True
+    detect_T_handle.start()
 
     src = args["input"] if args["input"] else 0
 
