@@ -1,6 +1,6 @@
 import argparse
-from threading import Thread
 import multiprocessing
+from threading import Thread
 import time
 from imutils.video import FPS
 from imutils.video import VideoStream
@@ -14,13 +14,13 @@ def detect(queue_in, queue_out):
     # process so we don't need to worry about joining it
     while True:
         # attempt to grab the next frame from the input queue
-        frame = queue_in.get()
-        if frame is None:
+        fr = queue_in.get()
+        if fr is None:
             continue
 
         # convert the frame to a blob and pass the blob through the
         # network and obtain the detections
-        detections = detector.detect(frame)
+        detections = detector.detect(fr)
         boxes = [centroid for (conf, box, centroid) in detections]
 
         queue_out.put(boxes)
